@@ -35,7 +35,7 @@ const TopBar = () => {
   return (
     <nav className="sticky top-0 z-50 bg-white/80 dark:bg-darkcard/80 backdrop-blur-md border-b border-slate-200 dark:border-darkborder px-6 py-4 flex items-center justify-between shadow-sm">
       <div className="flex items-center gap-6 text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-500">
-        <span>✓ TaskTracker</span>
+        <span>Task Manager</span>
         {user && (
           <div className="flex gap-4 text-sm font-medium text-slate-700 dark:text-slate-300 items-center">
             <Link to="/" className="hover:text-primary transition-colors">Dashboard</Link>

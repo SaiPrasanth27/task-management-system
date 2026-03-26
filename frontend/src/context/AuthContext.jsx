@@ -16,15 +16,31 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async (email, password) => {
-    const response = await api.post('/auth/login', { email, password });
-    setUser(response.data);
-    localStorage.setItem('user', JSON.stringify(response.data));
+    try {
+      const response = await api.post('/auth/login', { email, password });
+      setUser(response.data);
+      localStorage.setItem('user', JSON.stringify(response.data));
+      return { success: true };
+    } catch (error) {
+      return { 
+        success: false, 
+        error: error.response?.data?.message || 'Login failed. Please check your credentials.' 
+      };
+    }
   };
 
   const register = async (name, email, password) => {
-    const response = await api.post('/auth/register', { name, email, password });
-    setUser(response.data);
-    localStorage.setItem('user', JSON.stringify(response.data));
+    try {
+      const response = await api.post('/auth/register', { name, email, password });
+      setUser(response.data);
+      localStorage.setItem('user', JSON.stringify(response.data));
+      return { success: true };
+    } catch (error) {
+      return { 
+        success: false, 
+        error: error.response?.data?.message || 'Registration failed. Please try again.' 
+      };
+    }
   };
 
   const logout = () => {

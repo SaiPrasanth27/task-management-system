@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-ro
 import { AuthProvider, AuthContext } from './context/AuthContext';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import ForgotPassword from './pages/ForgotPassword';
 import TaskList from './pages/TaskList';
 import Dashboard from './pages/Dashboard';
 
@@ -25,7 +26,7 @@ const ThemeToggle = () => {
 
   return (
     <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')} className="btn-outline text-sm py-1.5 px-3">
-      {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
+      {theme === 'light' ? '🌙' : '☀️'}
     </button>
   );
 };
@@ -61,6 +62,7 @@ function AppRoutes() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
           <Route path="/tasks" element={<PrivateRoute><TaskList /></PrivateRoute>} />
         </Routes>

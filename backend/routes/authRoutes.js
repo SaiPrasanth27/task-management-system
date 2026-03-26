@@ -57,4 +57,32 @@ router.post('/login', async (req, res, next) => {
   }
 });
 
+// @route   PUT /api/auth/reset-password
+router.put('/reset-password', async (req, res, next) => {
+  try {
+    const { email, newPassword } = req.body;
+    if (!email || !newPassword) {
+      res.status(400);
+      throw new Error('Please provide email and new password');
+    }
+    const user = await User.findOne({ email }).select('+password');
+    if (!user) {
+      res.status(404);
+      throw new Error('User not found');
+    }
+    
+    if (newPassword.length < 6) {
+      res.status(400);
+      throw new Error('Password must be at least 6 characters');
+    }
+    
+    user.password = newPassword;
+    await user.save();
+    
+    res.json({ message: 'Password reset successfully' });
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;
